@@ -1,0 +1,29 @@
+1.
+SELECT ID_pesanan, nama_menu, harga 
+FROM menu
+WHERE harga < 15000;
+
+2.
+SELECT nama_pelanggan 
+FROM pesanan 
+WHERE DAY(tanggal_pesanan) = 12;
+
+3.
+SELECT nama_pelanggan, nama_menu, tanggal_pesanan, jumlah_pesanan
+FROM pesanan
+WHERE jumlah_pesanan >= 3;
+
+4.
+SELECT nama_pelanggan, id_menu, tanggal_pesanan, jumlah_pesanan, harga,
+CASE 
+  WHEN jumlah_pesanan * harga >= 35000 THEN 'Diskon 2000'
+  ELSE 'Tidak ada diskon'
+END AS 'Keterangan Lanjutan'
+FROM pesanan;
+
+5.
+SELECT pelanggan.nama_pelanggan, menu.nama_menu, pesanan.tanggal_pesanan, pesanan.jumlah_pesanan, 
+       menu.harga AS harga_satuan, (pesanan.jumlah_pesanan * menu.harga) AS harga_total
+FROM pesanan
+LEFT OUTER JOIN pelanggan ON pesanan.id_pelanggan = pelanggan.id_pelanggan
+LEFT OUTER JOIN menu ON pesanan.id_menu = menu.id_menu;
